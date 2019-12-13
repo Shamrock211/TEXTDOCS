@@ -21,7 +21,15 @@ public class DictionaryLL implements Dictionary
      * (it wasn't already there). */
     public boolean addWord(String word) {
     	// TODO: Implement this method
+    	word = word.toLowerCase();
+    	if(dict.contains(word)) {
+    		return false;
+    	}
+    	else {
+    		dict.add(word);
         return false;
+    	}
+
     }
 
 
