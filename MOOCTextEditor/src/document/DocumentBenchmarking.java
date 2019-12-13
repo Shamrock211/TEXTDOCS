@@ -44,18 +44,40 @@ public class DocumentBenchmarking {
 		{
 			 
 			System.out.print(numToCheck + "\t\t");
+			long basic = 0;
+			String returned = getStringFromFile(textfile, numToCheck);
 			
-			System.out.print(time + "\t\t");
-			startTime = System.nanoTime();
+			basic = System.nanoTime();
 			for (int i = 0; i < trials; i++)
 			{
-				EfficientDocument sample = new EfficientDocument(characters);
-				fleschScore = sample.getFleschScore();
+				BasicDocument basicdoc = new BasicDocument(returned);
+				basicdoc.getFleschScore();
 	
 			}
-			 endTime = System.nanoTime();
-			 time = (endTime - startTime) / 1000000000.0;
-			 System.out.print(time + "\n");
+			long efficient = 0;
+			efficient = System.nanoTime();
+			
+			double total1 = 0 ;
+			total1 = (efficient- basic);
+			
+			System.out.print((total1)/(100000000)+" \t");
+			long first = 0;
+			first = System.nanoTime();
+			
+			for ( int j = 0; j < trials; j++) {
+				EfficientDocument efficientdoc = new EfficientDocument(returned);
+				efficientdoc.getFleschScore();
+			}
+			long second= 0;
+			second = System.nanoTime();
+			
+			double total2 = 0 ;
+			total2= (first-second);
+			System.out.print(((total2)/1000000000)+" \n");
+			
+			
+			
+			 
 		}
 	
 	}

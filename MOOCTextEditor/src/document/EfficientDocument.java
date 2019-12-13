@@ -68,10 +68,9 @@ public class EfficientDocument extends Document {
 				numSentences++;
 				end = false;
 			}
+			numSyllables += countSyllables(word);
 		}
-			if (end && numWords != 0){
-				numSentences++;
-				}
+			
 		
 		// TODO: Finish this method.  Remember the countSyllables method from 
 		// Document.  That will come in handy here.  isWord defined above will also help.

@@ -109,41 +109,19 @@ public class MyLinkedListTester {
 	@Test
 	public void testRemove()
 	{
-		try {
-			shortList.remove(2);
-			fail("Check out of bounds");
-		}
-		catch (IndexOutOfBoundsExpection e) {
-			
-		}
 		int a = list1.remove(0);
 		assertEquals("Remove: check a is correct ", 65, a);
-		assertEquals("Remove: check element 0 is correct ", (Integer)21, list1.get(0));
 		assertEquals("Remove: check element 0 is correct ", (Integer)21, list1.head.next.prev.data);
 		assertEquals("Remove: check size is correct ", 2, list1.size());
 		
-		// TODO: Add more tests here
-		int b = list1.remove(list1.size() - 1);
-		assertEquals("Remove: check a is correct ", 65, a);
-		assertEquals("Remove: check element last - 1 is correct ", (Integer)21, list1.get(0));
-		assertEquals("Remove: check element last - 1 is correct ", (Integer)21, list1.head.next.prev.data);
-		assertEquals("Remove: check size is correct ", 1, list1.size());
 		
-		try {
-			emptyListremove(0);
-			fail("Check out of bounds");
-		}
-		catch (IndexOutOfBoundsException e) {
-	
-		}
+		
+		
+		
 		
 		
 	}
 	
-	private void emptyListremove(int i) {
-		// TODO Auto-generated method stub
-		
-	}
 
 
 	/** Test adding an element into the end of the list, specifically
@@ -153,6 +131,8 @@ public class MyLinkedListTester {
 	public void testAddEnd()
 	{
         // TODO: implement this test
+		list1.add(1);
+		assertEquals((Integer)1, list1.get(3));
 		
 	}
 
@@ -162,6 +142,7 @@ public class MyLinkedListTester {
 	public void testSize()
 	{
 		// TODO: implement this test
+		assertEquals(3, list1.size());
 	}
 
 	
