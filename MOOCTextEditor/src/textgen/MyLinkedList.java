@@ -69,42 +69,24 @@ public class MyLinkedList<E> extends AbstractList<E> {
 	public void add(int index, E element ) 
 	{
 		// TODO: Implement this method
-		if (element == null)
+		if (element == null) {
 			throw new NullPointerException("Value to be added cannot be null.");
-		if (index > this.size || index <0)
+		}
+		if ((index < 0 || index > size - 1) && (index != 0 || size != 0)) {
 			throw new IndexOutOfBoundsException("Indexout of bounds!.");
-		LLNode<E> elementToAdd = new LLNode(element);
-		if (this.size == 0) {
-			
-			this.head = elementToAdd;
-			this.tail = elementToAdd;
 		}
-		else if (index == this.size) {
-			this.tail.next = tail;
-			elementToAdd.prev = this.tail;
-			this.tail = elementToAdd;
+		LLNode<E> nodeToAdd = new LLNode(element);
+		LLNode<E> indexNode = head;
+		for (int i = 0; i <= index; i++) {
+			indexNode = indexNode.next;
 		}
-		else if (index == 0) {
-			elementToAdd.next = this.head;
-			this.head.prev = elementToAdd;
-			this.head = elementToAdd;
-		}
-		else {
-			
-			int count = 0;
-			LLNode<E> temp = this.head;
-			while (count < index)
-			{
-				temp = temp.next;
-				count++;
-			}
-			elementToAdd.next = temp;
-			elementToAdd.prev = temp.prev;
-			temp.prev.next = elementToAdd;
-			temp.prev = elementToAdd;
+		LLNode<E> prev = indexNode.prev;
+			prev.next = nodeToAdd;
+			nodeToAdd.prev = prev;
+			nodeToAdd.next = indexNode;
+			indexNode.prev = nodeToAdd;
 					
-		}
-		this.size++;
+		size++;
 		
 		
 	}
@@ -126,41 +108,21 @@ public class MyLinkedList<E> extends AbstractList<E> {
 	public E remove(int index) 
 	{
 		// TODO: Implement this method
-		if (index >= this.size || index < 0)
+		if (index >= size || index < 0) {
 			throw new IndexOutOfBoundsException("Index out of bounds!");
+		}
 		
-		E returnValue;
-		
-		if (this.size == 1) {
-			returnValue = this.head.data;
-			this.head = null;
-			this.tail = this.head;
-		}
-		else if (index == this.size - 1) {
-			returnValue = this.tail.data;
-			this.tail = this.tail.prev;
-			this.tail.next.prev = null;
-			this.tail.next = null;
-		}
-		else if (index == 0) {
-			returnValue = this.head.data;
-			this.head = this.head.next;
-			this.head.prev.next = null;
-			this.head.prev = null;
-		}
-		else {
-			int count = 0;
-			LLNode<E> temp =this.head;
-			while (count < index) {
-				temp = temp.next;
-				count++;
+	
+			LLNode<E> removeNode = head.next;
+			while (index > 0) {
+				removeNode = removeNode.next;
+				index--;
 			}
-			returnValue = temp.data;
-			temp.prev.next = temp.next;
-			temp.prev.next = temp.prev;
-		}
-		this.size--;
-		return returnValue;
+			removeNode.next.prev = removeNode.prev;
+			removeNode.prev.next = removeNode.next;
+			
+			size--;
+		return removeNode.data;
 		
 		
 		
@@ -176,19 +138,20 @@ public class MyLinkedList<E> extends AbstractList<E> {
 	public E set(int index, E element) 
 	{
 		// TODO: Implement this method
-		if (element == null) {
+		if (index < 0 || index > size - 1) {
 			throw new NullPointerException("Value to be added cannot be null.");
 		}
-		int count = 0;
-		LLNode<E> temp= this.head;
+		if (element == null) {
+			throw new NullPointerException("Invaild input");
+		}
 		
-		while (count <index) {
-				temp = temp.next;
-				count++;
-			}
-			E returnValue = temp.data;
-			temp.data = element;
-			return returnValue;
+		LLNode<E> setNode= head;
+		for (int i = 0; i <= index; i++) {
+			setNode = setNode.next;
+		}
+		
+			setNode.data = element;
+			return element;
 		}
 		
 	}   
